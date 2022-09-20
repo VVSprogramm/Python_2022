@@ -1,10 +1,13 @@
+import datetime
+import csv
+
 class Rekins():
     def __init__(self,klients,veltijums,izmers,materials):
         self.klients = klients
         self.veltijums = veltijums
         self.izmers = izmers.split(",")
         self.materials = float(materials)
-
+        self.laiks = datetime.datetime.now()
         
         self.aprekins()
 
@@ -13,6 +16,7 @@ class Rekins():
         print("Veltījums:",self.veltijums)
         print("Izmērs:", self.izmers)
         print("Materiāls:",self.materials)
+        print("Laiks:",self.laiks)
         print("Apmaksas summa: ", self.aprekins())
 
     def aprekins(self):
@@ -23,10 +27,17 @@ class Rekins():
         rekina_summa = (produkta_cena + darba_samaksa) + PVN_summa
         return rekina_summa
 
+    def saglabat(self):
+        with open('rekini.csv', 'w',encoding="utf-8",newline='') as fails:
+            csvwrite = csv.writer(fails)
+            csvwrite.writerow(['Klienta vārds','Veltījums','Izmēri','Materiāla cena','Laiks','Cena'])
+            csvwrite.writerow([self.klients,self.veltijums,self.izmers,self.materials,self.laiks,self.aprekins()])
+
 klients = input("Ievadi vārdu: ")
 veltijums = input("Ievadi veltījumu: ")
 izmers = input("Ievadi izmēru (platums,garums,augstums): ")
 materials = input("Ievadi materiāla cenu EUR/m2: ")
 
 pirmais = Rekins(klients,veltijums,izmers,materials)
+pirmais.saglabat()
 pirmais.izdrukat()
