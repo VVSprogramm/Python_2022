@@ -33,11 +33,3 @@ class Rekins():
             csvwrite.writerow(['Klienta vārds','Veltījums','Izmēri','Materiāla cena','Laiks','Cena'])
             csvwrite.writerow([self.klients,self.veltijums,self.izmers,self.materials,self.laiks,self.aprekins()])
 
-klients = input("Ievadi vārdu: ")
-veltijums = input("Ievadi veltījumu: ")
-izmers = input("Ievadi izmēru (platums,garums,augstums): ")
-materials = input("Ievadi materiāla cenu EUR/m2: ")
-
-pirmais = Rekins(klients,veltijums,izmers,materials)
-pirmais.saglabat()
-pirmais.izdrukat()
